@@ -3,7 +3,7 @@ zx spectrum emulator with esp8266 and ili9341 display
 
 ![Screenshot](zxpicture.jpg)
 
-Part list:
+Parts list:
 
 1 es8266 nodemcu
 
@@ -31,5 +31,6 @@ Part list:
 ![Screenshot](zx_esp8266.JPG)
 ![Screenshot](zx_keyboard_joystick.JPG)
 ![Screenshot](zx_display_sdcard.JPG)
+![Screenshot](zxkeyboard.png)
 
 
