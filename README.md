@@ -3,10 +3,7 @@ zx spectrum emulator with esp8266 and ili9341 display
 
 ![Screenshot](zxpicture.jpg)
 
-![Screenshot](video.jpg)
-
-![Image](20200119_063959_1.avi)] 
-
+ 
 
 
 Parts list:
