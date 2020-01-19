@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--This file was written by TinyCAD Version 2.90.00 Build #686 Production Release
+If you wish to view this file go to http://tinycad.sourceforge.net to
+download the executable.-->
+<TinyCADSheets>
+	<TinyCAD>
+		<NAME>Sheet 1</NAME>
+		<DETAILS>
+			<Size width='1485' height='1050'/>
+			<GUIDES horiz='7' vert='5'/>
+			<TITLE></TITLE>
+			<AUTHOR></AUTHOR>
+			<REVISION>1.0</REVISION>
+			<DOCNUMBER></DOCNUMBER>
+			<ORGANISATION></ORGANISATION>
+			<SHEETS>1 of 1</SHEETS>
+			<SHOWS>1</SHOWS>
+			<DATE></DATE>
+			<GRID spacing='100.00000' snap='1'/>
+		</DETAILS>
+		<FONT id='1'>
+			<HEIGHT>-10</HEIGHT>
+			<WIDTH>0</WIDTH>
+			<WEIGHT>400</WEIGHT>
+			<ITALIC>0</ITALIC>
+			<UNDERLINE>0</UNDERLINE>
+			<STRIKEOUT>0</STRIKEOUT>
+			<CHARSET>0</CHARSET>
+			<FACENAME>Arial</FACENAME>
+		</FONT>
+		<FONT id='3'>
+			<HEIGHT>-13</HEIGHT>
+			<WIDTH>6</WIDTH>
+			<WEIGHT>400</WEIGHT>
+			<ITALIC>0</ITALIC>
+			<UNDERLINE>0</UNDERLINE>
+			<STRIKEOUT>0</STRIKEOUT>
+			<CHARSET>0</CHARSET>
+			<FACENAME>Arial</FACENAME>
+		</FONT>
+		<STYLE id='2'>
+			<STYLE>0</STYLE>
+			<COLOR>000000</COLOR>
+			<THICKNESS>1</THICKNESS>
+		</STYLE>
+		<FILL id='0'>
+			<INDEX>-1</INDEX>
+			<COLOR>000000</COLOR>
+		</FILL>
+		<SYMBOLDEF id='1'>
+			<NAME type='0'>4503b</NAME>
+			<REF type='0'>U?</REF>
+			<DESCRIPTION>4503b</DESCRIPTION>
+			<PPP>1</PPP>
+			<FIELD>
+				<NAME>$$SPICE_PROLOG_PRIORITY</NAME>
+				<DEFAULT>5</DEFAULT>
+				<FT>000002</FT>
+				<VALUE></VALUE>
+				<POS>0.00000,0.00000</POS>
+			</FIELD>
+			<FIELD>
+				<NAME>$$SPICE_EPILOG_PRIORITY</NAME>
+				<DEFAULT>5</DEFAULT>
+				<FT>000002</FT>
+				<VALUE></VALUE>
+				<POS>0.00000,0.00000</POS>
+			</FIELD>
+			<FIELD>
+				<NAME>Package</NAME>
+				<DEFAULT>4503b</DEFAULT>
+				<FT>000001</FT>
+				<VALUE></VALUE>
+				<POS>0.00000,0.00000</POS>
+			</FIELD>
+			<REF_POINT power='0' part='0' pos='151.00000,119.00000'/>
+			<TinyCAD>
+				<WIRE a='147.00000,87.00000' b='136.00000,88.00000'/>
+				<WIRE a='147.00000,99.00000' b='136.00000,100.00000'/>
+				<WIRE a='147.00000,111.00000' b='136.00000,112.00000'/>
+				<WIRE a='120.00000,87.00000' b='126.00000,87.00000'/>
+				<WIRE a='126.00000,87.00000' b='126.00000,83.00000'/>
+				<WIRE a='126.00000,83.00000' b='130.00000,83.00000'/>
+				<WIRE a='130.00000,95.00000' b='126.00000,95.00000'/>
+				<WIRE a='126.00000,95.00000' b='126.00000,99.00000'/>
+				<WIRE a='126.00000,99.00000' b='120.00000,99.00000'/>
+				<WIRE a='130.00000,71.00000' b='126.00000,71.00000'/>
+				<WIRE a='126.00000,71.00000' b='126.00000,75.00000'/>
+				<WIRE a='126.00000,75.00000' b='120.00000,75.00000'/>
+				<PIN pos='149.00000,69.00000' which='0' elec='1' direction='2' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='130.00000,83.00000' which='0' elec='0' direction='1' part='0' number='1' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='130.00000,94.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<POLYGON pos='127.00000,86.00000' style='2' fill='0'>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+					<POINT pos='0.00000,0.00000' arc='0'/>
+					<POINT pos='3.00000,5.00000' arc='0'/>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+				</POLYGON>
+				<PIN pos='130.00000,95.00000' which='0' elec='0' direction='1' part='0' number='1' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='130.00000,106.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<POLYGON pos='127.00000,98.00000' style='2' fill='0'>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+					<POINT pos='0.00000,0.00000' arc='0'/>
+					<POINT pos='3.00000,5.00000' arc='0'/>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+				</POLYGON>
+				<PIN pos='123.20000,77.60000' which='1' elec='0' direction='3' part='0' number='' show='0' length='30' number_pos='0' centre_name='0'>1C</PIN>
+				<PIN pos='123.20000,89.60000' which='1' elec='0' direction='3' part='0' number='' show='0' length='30' number_pos='0' centre_name='0'>1C</PIN>
+				<PIN pos='123.20000,101.60000' which='1' elec='0' direction='3' part='0' number='' show='0' length='30' number_pos='0' centre_name='0'>1C</PIN>
+				<PIN pos='143.80000,106.40000' which='1' elec='0' direction='2' part='0' number='' show='0' length='30' number_pos='0' centre_name='0'>1C</PIN>
+				<PIN pos='143.80000,94.40000' which='1' elec='0' direction='2' part='0' number='' show='0' length='30' number_pos='0' centre_name='0'>1C</PIN>
+				<PIN pos='143.80000,82.40000' which='1' elec='0' direction='2' part='0' number='' show='0' length='30' number_pos='0' centre_name='0'>1C</PIN>
+				<WIRE a='144.00000,115.00000' b='144.00000,107.00000'/>
+				<WIRE a='120.00000,69.00000' b='123.00000,69.00000'/>
+				<WIRE a='123.00000,69.00000' b='123.00000,115.00000'/>
+				<WIRE a='123.00000,115.00000' b='144.00000,115.00000'/>
+				<WIRE a='120.00000,111.00000' b='130.00000,111.00000'/>
+				<POWER pos='130.00000,111.00000' which='0' direction='1'></POWER>
+				<WIRE a='144.00000,75.00000' b='144.00000,94.00000'/>
+				<WIRE a='144.00000,75.00000' b='147.00000,75.00000'/>
+				<WIRE a='144.00000,69.00000' b='147.00000,69.00000'/>
+				<TEXT pos='138.00000,70.00000' direction='3' font='3' color='000000'>Vcc</TEXT>
+				<RECTANGLE a='121.00000,65.00000' b='146.00000,119.00000' style='2' fill='0'/>
+				<TEXT pos='119.00000,68.00000' direction='3' font='3' color='000000'>1</TEXT>
+				<TEXT pos='119.00000,74.00000' direction='3' font='3' color='000000'>2</TEXT>
+				<TEXT pos='119.00000,81.00000' direction='3' font='3' color='000000'>3</TEXT>
+				<TEXT pos='119.00000,86.00000' direction='3' font='3' color='000000'>4</TEXT>
+				<TEXT pos='119.00000,93.00000' direction='3' font='3' color='000000'>5</TEXT>
+				<TEXT pos='119.00000,98.00000' direction='3' font='3' color='000000'>6</TEXT>
+				<TEXT pos='119.00000,105.00000' direction='3' font='3' color='000000'>7</TEXT>
+				<TEXT pos='119.00000,110.00000' direction='3' font='3' color='000000'>8</TEXT>
+				<TEXT pos='147.00000,111.00000' direction='3' font='3' color='000000'>9</TEXT>
+				<TEXT pos='147.00000,105.00000' direction='3' font='3' color='000000'>10</TEXT>
+				<TEXT pos='147.00000,98.00000' direction='3' font='3' color='000000'>11</TEXT>
+				<TEXT pos='147.00000,91.00000' direction='3' font='3' color='000000'>12</TEXT>
+				<TEXT pos='147.00000,86.00000' direction='3' font='3' color='000000'>13</TEXT>
+				<TEXT pos='147.00000,81.00000' direction='3' font='3' color='000000'>14</TEXT>
+				<TEXT pos='147.00000,75.00000' direction='3' font='3' color='000000'>15</TEXT>
+				<TEXT pos='147.00000,69.00000' direction='3' font='3' color='000000'>16</TEXT>
+				<PIN pos='149.00000,75.00000' which='0' elec='1' direction='2' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='149.00000,111.00000' which='0' elec='1' direction='2' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='149.00000,99.00000' which='0' elec='1' direction='2' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='149.00000,87.00000' which='0' elec='1' direction='2' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='117.00000,111.00000' which='0' elec='1' direction='3' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='117.00000,99.00000' which='0' elec='1' direction='3' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='117.00000,87.00000' which='0' elec='1' direction='3' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='117.00000,75.00000' which='0' elec='1' direction='3' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<POLYGON pos='127.00000,74.00000' style='2' fill='0'>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+					<POINT pos='0.00000,0.00000' arc='0'/>
+					<POINT pos='3.00000,5.00000' arc='0'/>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+				</POLYGON>
+				<POLYGON pos='133.00000,80.40000' style='2' fill='0'>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+					<POINT pos='0.00000,0.00000' arc='0'/>
+					<POINT pos='3.00000,5.00000' arc='0'/>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+				</POLYGON>
+				<POLYGON pos='133.00000,92.00000' style='2' fill='0'>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+					<POINT pos='0.00000,0.00000' arc='0'/>
+					<POINT pos='3.00000,5.00000' arc='0'/>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+				</POLYGON>
+				<POLYGON pos='133.00000,104.00000' style='2' fill='0'>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+					<POINT pos='0.00000,0.00000' arc='0'/>
+					<POINT pos='3.00000,5.00000' arc='0'/>
+					<POINT pos='6.00000,0.00000' arc='0'/>
+				</POLYGON>
+				<PIN pos='117.00000,69.00000' which='0' elec='1' direction='3' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='117.00000,81.00000' which='0' elec='1' direction='3' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='117.00000,93.00000' which='0' elec='1' direction='3' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='117.00000,105.00000' which='0' elec='1' direction='3' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<WIRE a='120.00000,93.00000' b='130.00000,94.00000'/>
+				<WIRE a='120.00000,105.00000' b='130.00000,106.00000'/>
+				<WIRE a='120.00000,81.00000' b='130.00000,82.00000'/>
+				<PIN pos='130.00000,82.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='130.00000,74.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='136.00000,104.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='136.00000,112.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='136.00000,100.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='136.00000,92.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='136.00000,80.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='136.00000,88.00000' which='0' elec='1' direction='0' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='149.00000,81.00000' which='0' elec='1' direction='2' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='149.00000,93.00000' which='0' elec='1' direction='2' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<PIN pos='149.00000,105.00000' which='0' elec='1' direction='2' part='0' number='3' show='0' length='15' number_pos='0' centre_name='0'>A</PIN>
+				<WIRE a='146.10000,104.90000' b='142.10000,104.90000'/>
+				<WIRE a='142.10000,104.90000' b='142.10000,100.90000'/>
+				<WIRE a='142.10000,100.90000' b='136.10000,100.90000'/>
+				<WIRE a='146.10000,92.90000' b='142.10000,92.90000'/>
+				<WIRE a='142.10000,92.90000' b='142.10000,88.90000'/>
+				<WIRE a='142.10000,88.90000' b='136.10000,88.90000'/>
+				<WIRE a='146.10000,80.90000' b='142.10000,80.90000'/>
+				<WIRE a='142.10000,80.90000' b='142.10000,76.90000'/>
+				<WIRE a='142.10000,76.90000' b='136.10000,76.90000'/>
+			</TinyCAD>
+		</SYMBOLDEF>
+		<OPTIONS>
+			<GRID>0</GRID>
+			<UNITS>1</UNITS>
+			<COLOR_WIRE>FF0000</COLOR_WIRE>
+			<COLOR_BUS>0000FF</COLOR_BUS>
+			<COLOR_JUNCTION>000000</COLOR_JUNCTION>
+			<COLOR_NOCONNECT>000000</COLOR_NOCONNECT>
+			<COLOR_LABEL>208000</COLOR_LABEL>
+			<COLOR_POWER>000000</COLOR_POWER>
+			<COLOR_PIN>4040C0</COLOR_PIN>
+			<COLOR_HIDDEN_PIN>208020</COLOR_HIDDEN_PIN>
+			<COLOR_BACKGROUND>FFFFFF</COLOR_BACKGROUND>
+			<COLOR_NOTETEXT_FILL>AFFFFF</COLOR_NOTETEXT_FILL>
+			<COLOR_NOTETEXT_LINE>FF0000</COLOR_NOTETEXT_LINE>
+			<COLOR_NOTETEXT_TEXT>FF0000</COLOR_NOTETEXT_TEXT>
+		</OPTIONS>
+		<RECTANGLE a='130.00000,4.00000' b='110.00000,58.00000' style='2' fill='0'/>
+		<RECTANGLE a='202.00000,46.00000' b='182.00000,82.00000' style='2' fill='0'/>
+		<WIRE a='110.00000,46.00000' b='106.00000,46.00000'/>
+		<WIRE a='182.00000,52.00000' b='178.00000,52.00000'/>
+		<WIRE a='110.00000,12.00000' b='106.00000,12.00000'/>
+		<WIRE a='182.00000,56.00000' b='178.00000,56.00000'/>
+		<POWER pos='106.00000,12.00000' which='0' direction='2'></POWER>
+		<POWER pos='178.00000,56.00000' which='0' direction='2'></POWER>
+		<TEXT pos='105.00000,9.40000' direction='0' font='3' color='000000'>+3.3</TEXT>
+		<TEXT pos='177.00000,51.40000' direction='0' font='3' color='000000'>+3.3</TEXT>
+		<WIRE a='78.00000,64.00000' b='64.00000,64.00000'/>
+		<WIRE a='74.00000,68.00000' b='64.00000,68.00000'/>
+		<WIRE a='82.00000,72.00000' b='64.00000,72.00000'/>
+		<WIRE a='110.00000,42.00000' b='78.00000,42.00000'/>
+		<WIRE a='74.00000,38.00000' b='110.00000,38.00000'/>
+		<WIRE a='82.00000,50.00000' b='110.00000,50.00000'/>
+		<WIRE a='110.00000,24.00000' b='56.00000,24.00000'/>
+		<WIRE a='150.00000,60.00000' b='64.00000,60.00000'/>
+		<WIRE a='150.00000,60.00000' b='150.00000,82.00000'/>
+		<WIRE a='164.00000,60.00000' b='150.00000,60.00000'/>
+		<WIRE a='110.00000,20.00000' b='56.00000,20.00000'/>
+		<TEXT pos='115.00000,45.28000' direction='0' font='3' color='000000'>CLK</TEXT>
+		<TEXT pos='191.00000,81.28000' direction='0' font='3' color='000000'>CLK</TEXT>
+		<TEXT pos='115.00000,50.72000' direction='0' font='3' color='000000'>IN</TEXT>
+		<TEXT pos='115.00000,39.76000' direction='0' font='3' color='000000'>OUT</TEXT>
+		<TEXT pos='187.00000,63.76000' direction='0' font='3' color='000000'>CS</TEXT>
+		<TEXT pos='115.00000,19.76000' direction='0' font='3' color='000000'>CS</TEXT>
+		<TEXT pos='115.00000,25.44000' direction='0' font='3' color='000000'>RST</TEXT>
+		<WIRE a='110.00000,28.00000' b='56.00000,28.00000'/>
+		<TEXT pos='115.00000,31.92000' direction='0' font='3' color='000000'>DC</TEXT>
+		<TEXT pos='50.00000,68.00000' direction='3' font='3' color='000000'>D7 MOSI</TEXT>
+		<TEXT pos='50.00000,72.00000' direction='3' font='3' color='000000'>D6 MISO</TEXT>
+		<TEXT pos='50.00000,64.00000' direction='3' font='3' color='000000'>D5 CLOCK</TEXT>
+		<TEXT pos='52.00000,20.00000' direction='3' font='3' color='000000'>D1</TEXT>
+		<TEXT pos='60.00000,60.00000' direction='3' font='3' color='000000'>D2</TEXT>
+		<TEXT pos='50.00000,24.00000' direction='3' font='3' color='000000'>SD3</TEXT>
+		<TEXT pos='52.00000,28.00000' direction='3' font='3' color='000000'>D4</TEXT>
+		<TEXT pos='201.00000,73.32000' direction='0' font='3' color='000000'>SD ADAPTER</TEXT>
+		<TEXT pos='129.00000,40.80000' direction='0' font='3' color='000000'>ILI9341 320X240</TEXT>
+		<TEXT pos='121.00000,11.28000' direction='0' font='3' color='000000'>LED</TEXT>
+		<WIRE a='110.00000,8.00000' b='106.00000,8.00000'/>
+		<TEXT pos='105.00000,47.40000' direction='0' font='3' color='000000'>+3.3</TEXT>
+		<TEXT pos='119.00000,40.96000' direction='0' font='3' color='000000'>MOSI</TEXT>
+		<TEXT pos='119.00000,54.96000' direction='0' font='3' color='000000'>MISO</TEXT>
+		<TEXT pos='191.00000,68.96000' direction='0' font='3' color='000000'>MOSI</TEXT>
+		<TEXT pos='187.00000,74.96000' direction='0' font='3' color='000000'>MISO</TEXT>
+		<TEXT pos='109.00000,7.52000' direction='0' font='3' color='000000'>1</TEXT>
+		<TEXT pos='109.00000,11.52000' direction='0' font='3' color='000000'>2</TEXT>
+		<TEXT pos='109.00000,19.52000' direction='0' font='3' color='000000'>3</TEXT>
+		<TEXT pos='109.00000,23.52000' direction='0' font='3' color='000000'>4</TEXT>
+		<TEXT pos='109.00000,27.52000' direction='0' font='3' color='000000'>5</TEXT>
+		<TEXT pos='109.00000,37.52000' direction='0' font='3' color='000000'>6</TEXT>
+		<TEXT pos='109.00000,41.52000' direction='0' font='3' color='000000'>7</TEXT>
+		<TEXT pos='109.00000,45.52000' direction='0' font='3' color='000000'>8</TEXT>
+		<TEXT pos='109.00000,49.52000' direction='0' font='3' color='000000'>9</TEXT>
+		<TEXT pos='181.00000,63.52000' direction='0' font='3' color='000000'>1</TEXT>
+		<TEXT pos='181.00000,67.52000' direction='0' font='3' color='000000'>2</TEXT>
+		<TEXT pos='181.00000,71.52000' direction='0' font='3' color='000000'>3</TEXT>
+		<TEXT pos='181.00000,75.52000' direction='0' font='3' color='000000'>4</TEXT>
+		<SYMBOL id='1' pos='154.00000,116.00000' part='0' rotate='3' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
+			<FIELD type='0' description='Ref' value='U?' show='1' pos='-54.00000,2.00000'/>
+			<FIELD type='0' description='Name' value='4503b' show='1' pos='-54.00000,-34.00000'/>
+			<FIELD type='2' description='$$SPICE_PROLOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
+			<FIELD type='2' description='$$SPICE_EPILOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
+			<FIELD type='1' description='Package' value='4503b' show='0' pos='-54.00000,4.40000'/>
+		</SYMBOL>
+		<WIRE a='144.00000,82.00000' b='144.00000,64.00000'/>
+		<WIRE a='132.00000,82.00000' b='132.00000,68.00000'/>
+		<WIRE a='114.00000,72.00000' b='114.00000,82.00000'/>
+		<WIRE a='126.00000,72.00000' b='126.00000,82.00000'/>
+		<WIRE a='120.00000,82.00000' b='120.00000,80.00000'/>
+		<POWER pos='108.00000,82.00000' which='0' direction='0'></POWER>
+		<TEXT pos='148.00000,118.00000' direction='3' font='3' color='000000'>+3.3</TEXT>
+		<TEXT pos='140.00000,118.00000' direction='3' font='3' color='000000'>+3.3</TEXT>
+		<TEXT pos='152.00000,60.00000' direction='3' font='3' color='000000'>CS</TEXT>
+		<TEXT pos='152.00000,66.00000' direction='3' font='3' color='000000'>OUT</TEXT>
+		<TEXT pos='152.00000,72.00000' direction='3' font='3' color='000000'>IN</TEXT>
+		<TEXT pos='152.00000,76.00000' direction='3' font='3' color='000000'>CLK</TEXT>
+		<WIRE a='164.00000,60.00000' b='164.00000,64.00000'/>
+		<WIRE a='164.00000,64.00000' b='182.00000,64.00000'/>
+		<TEXT pos='58.24000,19.00000' direction='3' font='3' color='000000'>CS</TEXT>
+		<TEXT pos='58.00000,24.00000' direction='3' font='3' color='000000'>RST</TEXT>
+		<TEXT pos='58.00000,28.00000' direction='3' font='3' color='000000'>DC</TEXT>
+		<JUNCTION pos='150.00000,60.00000'/>
+		<WIRE a='74.00000,38.00000' b='74.00000,68.00000'/>
+		<JUNCTION pos='74.00000,68.00000'/>
+		<WIRE a='132.00000,68.00000' b='74.00000,68.00000'/>
+		<WIRE a='78.00000,42.00000' b='78.00000,64.00000'/>
+		<JUNCTION pos='78.00000,64.00000'/>
+		<WIRE a='144.00000,64.00000' b='78.00000,64.00000'/>
+		<WIRE a='82.00000,50.00000' b='82.00000,72.00000'/>
+		<JUNCTION pos='82.00000,72.00000'/>
+		<WIRE a='114.00000,72.00000' b='82.00000,72.00000'/>
+		<WIRE a='138.00000,82.00000' b='138.00000,76.00000'/>
+		<WIRE a='138.00000,76.00000' b='182.00000,76.00000'/>
+		<WIRE a='126.00000,72.00000' b='160.00000,72.00000'/>
+		<WIRE a='160.00000,72.00000' b='160.00000,68.00000'/>
+		<WIRE a='160.00000,68.00000' b='182.00000,68.00000'/>
+		<WIRE a='120.00000,80.00000' b='168.00000,80.00000'/>
+		<WIRE a='168.00000,80.00000' b='168.00000,72.00000'/>
+		<WIRE a='168.00000,72.00000' b='182.00000,72.00000'/>
+	</TinyCAD>
+</TinyCADSheets>
