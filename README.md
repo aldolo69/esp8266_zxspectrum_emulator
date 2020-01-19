@@ -3,6 +3,9 @@ zx spectrum emulator with esp8266 and ili9341 display
 
 ![Screenshot](zxpicture.jpg)
 
+![Screenshot](video.jpg)
+
+
 Parts list:
 
 1 es8266 nodemcu
@@ -26,6 +29,8 @@ Parts list:
 6 10kohm resistors
 
 15 1n4148 diodes
+
+47 buttons
 
 
 ![Screenshot](zx_esp8266.JPG)
