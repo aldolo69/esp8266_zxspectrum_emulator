@@ -16,9 +16,9 @@
 //-change iromfilesize
 //-change promfilename. leave the last 0 there
 #include "Z80file_demo.h"
-const unsigned char * pRomFile[] = {};//z80file_bubblefrenzy, z80file_fistrofighter, z80file_invasivespecies};
-int iRomFileSize[] = {};//sizeof(z80file_bubblefrenzy), sizeof(z80file_fistrofighter), sizeof(z80file_invasivespecies)};
-char * pRomFileName[] = {0};//F("Bubble frenzy"), F("Fist RO Fighter"), F("Invasive species"), 0};
+const unsigned char * pRomFile[] = {z80file_bubblefrenzy, z80file_fistrofighter, z80file_invasivespecies};
+int iRomFileSize[] = {sizeof(z80file_bubblefrenzy), sizeof(z80file_fistrofighter), sizeof(z80file_invasivespecies)};
+char * pRomFileName[] = {F("Bubble frenzy"), F("Fist RO Fighter"), F("Invasive species"), 0};
 
 
 
