@@ -23,10 +23,13 @@ Part list:
 
 5 100nf decoupling capacitors
 
-10 10kohm resistors
+6 10kohm resistors
 
 15 1n4148 diodes
 
 
+![Screenshot](zx_esp8266.JPG)
+![Screenshot](zx_keyboard_joystick.JPG)
+![Screenshot](zx_display_sdcard.JPG)
 
 
