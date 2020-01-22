@@ -5,8 +5,9 @@ Compiled using https://github.com/uli/Arduino_nowifi
 
 * audio
 * joystick
-* load z80
-* save z80
+* load .z80 from SD
+* load .z80 from EEPROM
+* save .z80 to SD
 
 ![Screenshot](zxpicture.jpg)
 
