@@ -1,5 +1,12 @@
 # esp8266_zxspectrum_emulator
-zx spectrum emulator with esp8266 and ili9341 display
+ZX Spectrum emulator with esp8266 and ili9341 display.
+
+Compiled using https://github.com/uli/Arduino_nowifi
+
+*audio
+*joystick
+*load z80
+*save z80
 
 ![Screenshot](zxpicture.jpg)
 
