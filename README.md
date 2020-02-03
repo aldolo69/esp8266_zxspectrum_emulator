@@ -12,7 +12,7 @@ Compiled using https://github.com/uli/Arduino_nowifi
 ![Screenshot](zxpicture.jpg)
 
  
-
+[![Alt text](https://img.youtube.com/vi/D_M-rMHq4L0/0.jpg)](https://www.youtube.com/watch?v=D_M-rMHq4L0)
 
 Parts list:
 
