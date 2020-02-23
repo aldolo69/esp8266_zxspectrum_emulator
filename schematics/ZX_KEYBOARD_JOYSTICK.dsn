@@ -1177,10 +1177,10 @@ download the executable.-->
 		<TEXT pos='222.00000,50.00000' direction='3' font='3' color='000000'>Left</TEXT>
 		<TEXT pos='222.00000,56.00000' direction='3' font='3' color='000000'>Down</TEXT>
 		<TEXT pos='222.00000,62.00000' direction='3' font='3' color='000000'>Up</TEXT>
-		<TEXT pos='162.00000,24.00000' direction='3' font='3' color='000000'>X</TEXT>
-		<TEXT pos='148.00000,24.00000' direction='3' font='3' color='000000'>D</TEXT>
-		<TEXT pos='134.00000,24.00000' direction='3' font='3' color='000000'>E</TEXT>
-		<TEXT pos='120.00000,24.00000' direction='3' font='3' color='000000'>3</TEXT>
+		<TEXT pos='162.00000,24.00000' direction='3' font='3' color='000000'>z</TEXT>
+		<TEXT pos='148.00000,24.00000' direction='3' font='3' color='000000'>s</TEXT>
+		<TEXT pos='134.00000,24.00000' direction='3' font='3' color='000000'>w</TEXT>
+		<TEXT pos='120.00000,24.00000' direction='3' font='3' color='000000'>2</TEXT>
 		<SYMBOL id='9' pos='156.00000,126.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
 			<FIELD type='0' description='Ref' value='U4' show='1' pos='-5.00000,-13.60000'/>
 			<FIELD type='0' description='Name' value='4081' show='1' pos='-5.00000,-16.00000'/>
