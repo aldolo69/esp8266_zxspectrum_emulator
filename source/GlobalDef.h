@@ -32,7 +32,7 @@
 
 
 #define SPI_SPEED_SD    1000000UL
-#define SPI_SPEED_TFT   20000000UL 
+#define SPI_SPEED_TFT   27000000UL 
 #define SPI_SPEED_KEYB  200000UL
 
 /*
@@ -60,6 +60,8 @@ better to drive the right cs pins before using sd or tft lib
 #define ZXKEYBOARDFILLBUFFER  // undefine to keep clear the emulator keyb buffer. debug purpose. usually defined
 //#define BORDERCOLORCHANGE1HZ  //define to cycle border color. debug purpose. usually undefined
 #define ZXKEYBOARDENABLED //undefine to disable spi for the keyboard. usually defined
+#define NOGAMESROM //undefine to add sample games
+
 
 //task performed in loop()
 #define EMUTASK_EMULATOR 0

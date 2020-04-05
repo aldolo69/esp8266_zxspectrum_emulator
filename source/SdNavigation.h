@@ -32,6 +32,9 @@ void sdNavigationSetup(void);
 int sdNavigation(boolean);
 void sdNavigationPrintNumber(int indx, int color);  
 void sdNavigationPrintNumberBig(int indx, int color);  
+int sdNavigationFileSave(char *filename);
+int sdNavigationGetFileName(char *filename);
+
 
 void   sdNavigationClearLine(int line, int color);
 void   sdNavigationPixMem(int x, int y, int *bmp, int *col);

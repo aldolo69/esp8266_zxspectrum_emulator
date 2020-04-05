@@ -98,20 +98,6 @@ unsigned char zxKeyboardBitRotarion[] = {
 
 
 
-int zxKeyboardGetSpecialKey()
-{
-  /*
-    if (digitalRead(KEYB_ESC) == 0) //special key
-    {
-      return 1;//ESC
-    }
-    if (digitalRead(KEYB_CTRL) == 0) //special key
-    {
-      return 2;//ESC
-    }
-  */
-  return 0;
-}
 
 
 //bits read from spi are remapped to zx port using a buffer
@@ -126,12 +112,12 @@ void zxKeyboardStopRead(void)
 
 #ifdef ZXKEYBOARDFILLBUFFER
   //bits received from spi
- //R 000000000011111111112222222222333333333344444444445555555555 4017 ROW SELECTION
- //C012345678901234567890123456789012345678901234567890123456789 4017 COLUMN SELECTION
-  
+  //R 000000000011111111112222222222333333333344444444445555555555 4017 ROW SELECTION
+  //C012345678901234567890123456789012345678901234567890123456789 4017 COLUMN SELECTION
+
   // 0000000011111111222222223333333344444444555555556666666677777777
   //          SzxcvbnmSSasdfghjklEqwertyuiop1234567890EFFrldu
-  //                                                  E12RLDU JOYSTICK + ESC BUTTON   
+  //                                                  E12RLDU JOYSTICK + ESC BUTTON
   //  bit
   //  4 3 2 1 0
   //  6 7 8 9 0
@@ -162,37 +148,37 @@ void zxKeyboardStopRead(void)
   //#define BUTTON_FIRE 32
   //#define BUTTON_FIRE2 16
   //#define BUTTON_ESC 64
-  KEMPSTONJOYSTICK =127&( *(p + 6));
+  KEMPSTONJOYSTICK = 127 & ( *(p + 6));
 
-//extern unsigned char *pJoyKeyAdd[6] ;
-//extern unsigned char  pJoyKeyVal[6] ;
-//up down left right f1 f2
+  //extern unsigned char *pJoyKeyAdd[6] ;
+  //extern unsigned char  pJoyKeyVal[6] ;
+  //up down left right f1 f2
 
-if(KEMPSTONJOYSTICK&BUTTON_UP && pJoyKeyVal[0]!=0xff)
-{
-  *pJoyKeyAdd[0]&=pJoyKeyVal[0];
-}
-if(KEMPSTONJOYSTICK&BUTTON_DOWN && pJoyKeyVal[1]!=0xff)
-{
-  *pJoyKeyAdd[1]&=pJoyKeyVal[1];
-}
-if(KEMPSTONJOYSTICK&BUTTON_LEFT && pJoyKeyVal[2]!=0xff)
-{
-  *pJoyKeyAdd[2]&=pJoyKeyVal[2];
-}
-if(KEMPSTONJOYSTICK&BUTTON_RIGHT && pJoyKeyVal[3]!=0xff)
-{
-  *pJoyKeyAdd[3]&=pJoyKeyVal[3];
-}
-if(KEMPSTONJOYSTICK&BUTTON_FIRE && pJoyKeyVal[4]!=0xff)
-{
-  *pJoyKeyAdd[4]&=pJoyKeyVal[4];
-}
-if(KEMPSTONJOYSTICK&BUTTON_FIRE2 && pJoyKeyVal[5]!=0xff)
-{
-  *pJoyKeyAdd[5]&=pJoyKeyVal[5];
-}
-  
+  if (KEMPSTONJOYSTICK & BUTTON_UP && pJoyKeyVal[0] != 0xff)
+  {
+    *pJoyKeyAdd[0] &= pJoyKeyVal[0];
+  }
+  if (KEMPSTONJOYSTICK & BUTTON_DOWN && pJoyKeyVal[1] != 0xff)
+  {
+    *pJoyKeyAdd[1] &= pJoyKeyVal[1];
+  }
+  if (KEMPSTONJOYSTICK & BUTTON_LEFT && pJoyKeyVal[2] != 0xff)
+  {
+    *pJoyKeyAdd[2] &= pJoyKeyVal[2];
+  }
+  if (KEMPSTONJOYSTICK & BUTTON_RIGHT && pJoyKeyVal[3] != 0xff)
+  {
+    *pJoyKeyAdd[3] &= pJoyKeyVal[3];
+  }
+  if (KEMPSTONJOYSTICK & BUTTON_FIRE && pJoyKeyVal[4] != 0xff)
+  {
+    *pJoyKeyAdd[4] &= pJoyKeyVal[4];
+  }
+  if (KEMPSTONJOYSTICK & BUTTON_FIRE2 && pJoyKeyVal[5] != 0xff)
+  {
+    *pJoyKeyAdd[5] &= pJoyKeyVal[5];
+  }
+
 
 #endif
 }
@@ -226,7 +212,176 @@ void zxKeyboardStartRead(void)
 
 
 
-void zxKeyboardSetup()
+void ICACHE_FLASH_ATTR zxKeyboardSetup()
 {
   //spi pins enabled in SpiSwitch
+}
+
+
+
+
+
+boolean ICACHE_FLASH_ATTR checkKeyBit( unsigned char *KEY, unsigned char button)
+{
+  if (!((*KEY) & button) ) // key pressed
+  {
+    *KEY =  0xff;
+    delay(100);
+    return true;//back to old program
+  }
+  return false;
+}
+
+
+//is there a pressed key or joystik? then wait
+void ICACHE_FLASH_ATTR waitforclearkeyb()
+{
+  for (;;)
+  {
+    yield();
+    if (
+      KEY[0] == 0xff &&
+      KEY[1] == 0xff &&
+      KEY[2] == 0xff &&
+      KEY[3] == 0xff &&
+      KEY[4] == 0xff &&
+      KEY[5] == 0xff &&
+      KEY[6] == 0xff &&
+      KEY[7] == 0xff &&
+      KEMPSTONJOYSTICK == 0) return;
+  }
+}
+
+
+
+//get the pressed key from buffer
+void ICACHE_FLASH_ATTR getKeyb(unsigned char **p, unsigned char *v)
+{
+  for (;;)
+  {
+    yield();
+    for (int i = 0; i < 8; i++)
+    {
+      if (KEY[i] != 0xff)
+      {
+        *p = &KEY[i];
+        *v = KEY[i];
+        return;
+      }
+    }
+  }
+}
+
+
+boolean ICACHE_FLASH_ATTR checkKeybBreak()
+{
+  if ( checkKeyBit(&(KEY[0]),  BUTTON_CS) && checkKeyBit(&(KEY[7]),  BUTTON_SP) )
+  {
+    return true;
+  }
+
+  return false;
+}
+
+
+char ICACHE_FLASH_ATTR getPressedCharacter()
+{
+
+  // \a   for unexisting characters
+  // \b  for delete
+  // \n  for enter
+  //regular key
+  //byte 0..3          //byte 4..7
+  unsigned char *cLow = (unsigned char *)"\azxcvasdfgqwert1234509876poiuy\nlkjh \amnb";
+
+  //symbol shift
+  //byte 0..3          //byte 4..7
+  unsigned char *cShift = (unsigned char *)"\a:\x60?/~|\\{}\a\a\a<>!@#$%_)('&\";\a[]\a=+-^\a\a.,*";
+  //                                             \x60=£ special character. not ascii
+  //caps shift
+  //byte 0..3          //byte 4..7
+  unsigned char *cUpper = (unsigned char *)"\aZXCVASDFGQWERT\a\a\a\a\a\b\a\a\a\aPOIUY\aLKJH\a\a\a\a\a";
+
+
+
+
+
+
+  char c = 0;
+  int ibit = 0;
+  int offset = 0;
+  int i = 0;
+  boolean bCS = false;
+  boolean bSS = false;
+
+
+  if ( checkKeyBit(&(KEY[0]),  BUTTON_CS) )
+  {
+    bCS = true; //caps shift
+  }
+  else
+  {
+    //no cs? maybe ss
+    if ( checkKeyBit(&(KEY[7]),  BUTTON_SS) )
+    {
+      bSS = true; //caps shift
+    }
+
+  }
+
+  //sweep along bits to find a single hit
+  for (i = 0; i < 8; i++)
+  {
+    offset = 0;
+    ibit = 1;
+    if (KEY[i] == 0xff) continue;
+    //find the 0 bit
+    for (; ibit <= 16; ) {
+      if (!(ibit & KEY[i]))
+      {
+        //is this a real key?
+        int coff = i * 5 + offset;
+        unsigned char pressed = cLow[coff];
+
+        if (bCS == true) pressed = cUpper[coff];
+        if (bSS == true) pressed = cShift[coff];
+        if (pressed != '\a')
+        {
+
+          //          DEBUG_PRINTLN("Key found");
+          //          DEBUG_PRINTLN(coff);
+          //          DEBUG_PRINTLN(i);
+          //          DEBUG_PRINTLN(offset);
+          //          DEBUG_PRINTLN(pressed);
+
+          c = pressed;
+          break;
+        }
+      }
+      ibit <<= 1;
+      offset++;
+    }
+    if (c != 0) break;
+
+  }
+
+
+
+  if (c)
+  { //wait for release of the pressed key
+    for (;;)
+    {
+      yield();
+      // DEBUG_PRINTLN("wait");
+      // DEBUG_PRINTLN((volatile unsigned char)KEY[i]);
+      // DEBUG_PRINTLN(i);
+      // DEBUG_PRINTLN(ibit);
+      if (ibit & (volatile unsigned char)KEY[i]) break;
+    }
+  }
+
+
+
+
+  return c;
 }

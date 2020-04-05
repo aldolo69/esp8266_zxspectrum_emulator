@@ -76,12 +76,16 @@ typedef struct z80fileheader2 {
 #include "SdFat.h"
 #include "FreeStack.h"
 int  z80FileLoad(SdFile *file);
+int  z80FileSave(File *file);
 void z80FileDecompress(SdFile *file,boolean m_isCompressed);
 void z80FileLoadFromEeprom(const unsigned char *MEM,int iMEMsize);
 void z80FileDecompressFromEeprom(const unsigned char *MEM,int iMEMsize,int offset,boolean m_isCompressed);
 
 void z80FileDecompressV2(int iDataSize, int iDataOffset, void(*callbackFillCache)(void));
 
+void z80FileSaveFillCacheStart(File *p, int offset );
+int z80FileSaveFillCacheContinue(unsigned char c );
+int z80FileSaveFillCacheEnd( void);
 
 
 

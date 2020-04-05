@@ -64,7 +64,7 @@ unsigned char soundenabled = 1; //default sound on
 void ICACHE_FLASH_ATTR stampabinario(unsigned char c);
 
 
-void setup() {
+void ICACHE_FLASH_ATTR setup() {
   //SET 160MHZ
   REG_SET_BIT(0x3ff00014, BIT(0));
   ets_update_cpu_frequency(160);
@@ -84,57 +84,18 @@ void setup() {
 
 
 }
-void waitforclearkeyb()
-{
-  for (;;)
-  {
-    yield();
-    if (
-      KEY[0] == 0xff &&
-      KEY[1] == 0xff &&
-      KEY[2] == 0xff &&
-      KEY[3] == 0xff &&
-      KEY[4] == 0xff &&
-      KEY[5] == 0xff &&
-      KEY[6] == 0xff &&
-      KEY[7] == 0xff &&
-      KEMPSTONJOYSTICK == 0) return;
-  }
-}
-
-void getKeyb(unsigned char **p, unsigned char *v)
-{
-  for (;;)
-  {
-    yield();
-    for (int i = 0; i < 8; i++)
-    {
-      if (KEY[i] != 0xff)
-      {
-        *p = &KEY[i];
-        *v = KEY[i];
-        return;
-      }
-    }
-  }
-}
-
-
-boolean checkKeyBit( unsigned char *KEY, unsigned char button)
-{
-  if (!((*KEY) & button) ) // key pressed
-  {
-    *KEY =  0xff;
-    delay(100);
-    return true;//back to old program
-  }
-  return false;
-}
 
 
 
 
-int showJoystick()
+
+
+
+
+
+
+
+int ICACHE_FLASH_ATTR showJoystick()
 {
   static char cStep = 0;
 
@@ -196,7 +157,7 @@ int showJoystick()
 //return 0 to do nothing
 //1..n to select an option
 //-1 to return to program
-int showMenu()
+int ICACHE_FLASH_ATTR showMenu()
 {
   static boolean bdisplayedmenu = false;
 
@@ -204,45 +165,49 @@ int showMenu()
   {
     bdisplayedmenu = true;
     sdNavigationCls(COLOR_TEXT);
-    sdNavigationPrintFStrBig(0, 0, F("0 back"), COLOR_TEXT);
-    sdNavigationPrintFStrBig(0, 2, F("1 SD list"), COLOR_TEXT);
-    sdNavigationPrintFStrBig(0, 4, F("2 EEPROM list"), COLOR_TEXT);
-    sdNavigationPrintFStrBig(0, 6, F("3 ZX keyboard"), COLOR_TEXT);
-    sdNavigationPrintFStrBig(0, 8, F("4 CPU"), COLOR_TEXT);
+    sdNavigationPrintFStrBig(0, 22, F("BRK to exit"), COLOR_TEXT);
+    sdNavigationPrintFStrBig(0, 0, F("1 SD list"), COLOR_TEXT);
+    sdNavigationPrintFStrBig(0, 2, F("2 EEPROM list"), COLOR_TEXT);
+    sdNavigationPrintFStrBig(0, 4, F("3 ZX keyboard"), COLOR_TEXT);
+    sdNavigationPrintFStrBig(0, 6, F("4 CPU"), COLOR_TEXT);
     switch (z80DelayCycle)
     { case CPUDELAYSLOWEST:// 500
-        sdNavigationPrintFStrBig(12, 8, F("SLOWEST"), COLOR_TEXT);
+        sdNavigationPrintFStrBig(12, 6, F("SLOWEST"), COLOR_TEXT);
         break;
       case CPUDELAYSLOWER:// 1000
-        sdNavigationPrintFStrBig(12, 8, F("SLOWER "), COLOR_TEXT);
+        sdNavigationPrintFStrBig(12, 6, F("SLOWER "), COLOR_TEXT);
         break;
       case CPUDELAYNORMAL:// 5000
-        sdNavigationPrintFStrBig(12, 8, F("NORMAL "), COLOR_TEXT);
+        sdNavigationPrintFStrBig(12, 6, F("NORMAL "), COLOR_TEXT);
         break;
       case CPUDELAYFASTER:// 5000
-        sdNavigationPrintFStrBig(12, 8, F("FASTER "), COLOR_TEXT);
+        sdNavigationPrintFStrBig(12, 6, F("FASTER "), COLOR_TEXT);
         break;
       case CPUDELAYFASTEST:// 50000
-        sdNavigationPrintFStrBig(12, 8, F("FASTEST"), COLOR_TEXT);
+        sdNavigationPrintFStrBig(12, 6, F("FASTEST"), COLOR_TEXT);
         break;
     }
 
 
 
-    sdNavigationPrintFStrBig(0, 10, F("5 Timer ..Hz"), COLOR_TEXT);
-    sdNavigationPrintChBig(16, 10, '0' + (timerfreq / 10), COLOR_TEXT);
-    sdNavigationPrintChBig(18, 10, '0' + (timerfreq % 10), COLOR_TEXT);
+    sdNavigationPrintFStrBig(0, 8, F("5 Timer ..Hz"), COLOR_TEXT);
+    sdNavigationPrintChBig(16, 8, '0' + (timerfreq / 10), COLOR_TEXT);
+    sdNavigationPrintChBig(18, 8, '0' + (timerfreq % 10), COLOR_TEXT);
 
-    sdNavigationPrintFStrBig(0, 12, F("6 Sound"), COLOR_TEXT);
+    sdNavigationPrintFStrBig(0, 10, F("6 Sound"), COLOR_TEXT);
     if (soundenabled)
     {
-      sdNavigationPrintFStrBig(16, 12, F("ON"), COLOR_TEXT);
+      sdNavigationPrintFStrBig(16, 10, F("ON"), COLOR_TEXT);
     }
     else
     {
-      sdNavigationPrintFStrBig(16, 12, F("OFF"), COLOR_TEXT);
+      sdNavigationPrintFStrBig(16, 10, F("OFF"), COLOR_TEXT);
     }
-    sdNavigationPrintFStrBig(0, 14, F("7 Joystik setup"), COLOR_TEXT);
+    sdNavigationPrintFStrBig(0, 12, F("7 Joystik setup"), COLOR_TEXT);
+
+    sdNavigationPrintFStrBig(0, 14, F("R Reset"), COLOR_TEXT);
+    sdNavigationPrintFStrBig(0, 16, F("S Save Z80 file"), COLOR_TEXT);
+
 
 
     //before returning wait for an empity kayb buffer
@@ -250,12 +215,43 @@ int showMenu()
     return 0;
   }
 
-  if (   checkKeyBit(&(KEY[4]),  BUTTON_0)
+
+
+
+  if (   checkKeybBreak() || checkKeyBit(&(KEY[4]),  BUTTON_0)
          || (KEMPSTONJOYSTICK && BUTTON_LEFT) ) //'0' key or left
   {
     bdisplayedmenu = false;
     return -1;//back to old program
   }
+
+
+
+  if (   checkKeyBit(&(KEY[2]),  BUTTON_R) ) //'R'
+  {
+    bdisplayedmenu = false;
+    ResetZ80(&state);
+    return -1;//back to old program
+  }
+
+  if (   checkKeyBit(&(KEY[1]),  BUTTON_S) ) //'S'
+  {
+    bdisplayedmenu = false;
+    char filename[32];
+    if (sdNavigationGetFileName(filename)==0)
+    {
+      strcat(filename, ".z80");
+      //before saving video restore is required. 
+      memcpy( RAM, CACHE, ZXSCREENSIZE);
+      sdNavigationFileSave(filename);
+      //cache video again before returning
+      memcpy( CACHE, RAM, ZXSCREENSIZE);
+    }
+
+    return -1;//back to old program
+  }
+
+
 
   if (   checkKeyBit(&(KEY[4]),  BUTTON_6) ) //'6'
   {
@@ -445,7 +441,7 @@ int showMenu()
 
 #ifdef DEBUG_PRINT
 
-void simulate_key(char cRead, char cCheck, unsigned char cBit, unsigned char *KEY, unsigned long *ulResetSerialKeyboard)
+void ICACHE_FLASH_ATTR simulate_key(char cRead, char cCheck, unsigned char cBit, unsigned char *KEY, unsigned long *ulResetSerialKeyboard)
 {
   if (cRead == cCheck)
   {
@@ -456,6 +452,16 @@ void simulate_key(char cRead, char cCheck, unsigned char cBit, unsigned char *KE
 #endif
 
 void loop() {
+
+
+  //
+  //char cc= getPressedCharacter();
+  //if(cc)
+  //{
+  //   DEBUG_PRINTLN("Key");
+  //   DEBUG_PRINTLN(cc);
+  //  }
+
 
 #ifdef DEBUG_PRINT
 
@@ -474,8 +480,8 @@ void loop() {
   //stampabinario(KEY[5]);DEBUG_PRINTLN("");
   //stampabinario(KEY[6]);DEBUG_PRINT("-");
   // stampabinario(KEY[7]);DEBUG_PRINTLN("");
-  if (KEMPSTONJOYSTICK != 0)
-    stampabinario(KEMPSTONJOYSTICK); DEBUG_PRINTLN("");
+  // if (KEMPSTONJOYSTICK != 0)
+  // stampabinario(KEMPSTONJOYSTICK); DEBUG_PRINTLN("");
 
 
 

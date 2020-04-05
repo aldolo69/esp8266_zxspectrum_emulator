@@ -7,6 +7,7 @@ extern "C" {
 #endif
 void  zxDisplayBorderSet(int i);
 void  zxDisplayWriteSerial(int i);
+int zxDisplayBorderGet(void);
 
 #ifdef __cplusplus
 }
@@ -22,6 +23,3 @@ void zxDisplaySetIntFrequency(int);
 
 
 #endif
-
-
-

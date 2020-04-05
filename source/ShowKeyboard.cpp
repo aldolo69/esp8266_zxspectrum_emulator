@@ -2,7 +2,7 @@
 
 #include "ShowKeyboard.h"
 #include "GlobalDef.h"
-
+#include "Zxkeyboard.h"
 
 extern unsigned char RAM[];
 extern const unsigned char ROM[];
@@ -24,7 +24,7 @@ int showKeyboard()
     return 0;
   }
 
-  if (!(KEY[4] & 1) ||  !(KEY[6] & 1) || KEMPSTONJOYSTICK  ) //'0' key or 'enter' key  or joy
+  if (checkKeybBreak() || !(KEY[4] & 1) ||  !(KEY[6] & 1) || KEMPSTONJOYSTICK  ) //'0' key or 'enter' key  or joy
   {
     delay(100);
     bdisplayed = false;

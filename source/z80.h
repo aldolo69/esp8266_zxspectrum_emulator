@@ -199,6 +199,7 @@ word16 LoopZ80(register Z80 *R);
 
 //used by the .z80 upload to set initial status
 boolean SetZ80(Z80 *R,struct z80fileheader * header);
+boolean GetZ80(Z80 *R,struct z80fileheader * header);
 
 
 

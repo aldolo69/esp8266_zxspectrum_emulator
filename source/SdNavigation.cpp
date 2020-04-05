@@ -16,10 +16,15 @@
 //-change iromfilesize
 //-change promfilename. leave the last 0 there
 #include "Z80file_demo.h"
+#ifdef NOGAMESROM
+const unsigned char * pRomFile[] = {};
+int iRomFileSize[] = {};
+char * pRomFileName[] = {0};
+#else
 const unsigned char * pRomFile[] = {z80file_bubblefrenzy, z80file_fistrofighter, z80file_invasivespecies};
 int iRomFileSize[] = {sizeof(z80file_bubblefrenzy), sizeof(z80file_fistrofighter), sizeof(z80file_invasivespecies)};
 char * pRomFileName[] = {F("Bubble frenzy"), F("Fist RO Fighter"), F("Invasive species"), 0};
-
+#endif
 
 
 extern void waitforclearkeyb(void);
@@ -122,7 +127,7 @@ void ICACHE_FLASH_ATTR sdNavigationPrintChBig(int x, int y, unsigned char c, int
       sdNavigationPixMem(x, y + 1, &bmpoffset, &coloffset);
     }
 
-//doubles horizontal pixels
+    //doubles horizontal pixels
     row = pgm_read_byte(p);
     row1 = 0;
     row2 = 0;
@@ -504,7 +509,7 @@ int ICACHE_FLASH_ATTR sdNavigationList(int fromindex, int len, boolean fromEepro
     }
   }
 
-  sdNavigationPrintFStrBig(0, 22, F("Q/A/0/ENT or joy"), COLOR_TEXT);
+  sdNavigationPrintFStrBig(0, 22, F("Q/A/BRK/ENT/joy"), COLOR_TEXT);
 
 
   return foundfiles;
@@ -514,7 +519,7 @@ int ICACHE_FLASH_ATTR sdNavigationList(int fromindex, int len, boolean fromEepro
 int ICACHE_FLASH_ATTR sdNavigation(boolean fromEeprom)
 {
   static boolean bdisplayed = false;
-  
+
   if (sdNavigationReadFiles == -1) //initialize list
   {
     unsigned long int lastcheck = 0;
@@ -528,11 +533,11 @@ int ICACHE_FLASH_ATTR sdNavigation(boolean fromEeprom)
     sdNavigationReadFiles = foundfiles;
     if (foundfiles > 0) sdNavigationPrintNumberBig(0, COLOR_FILE_SELECTED);
 
-  if (!bdisplayed)
-  {
-    bdisplayed = true;
-    waitforclearkeyb();
-  }
+    if (!bdisplayed)
+    {
+      bdisplayed = true;
+      waitforclearkeyb();
+    }
   }
 
   //check up/down/enter
@@ -546,13 +551,13 @@ int ICACHE_FLASH_ATTR sdNavigation(boolean fromEeprom)
   {
     if (!(KEY[1] & BUTTON_A) ||  (KEMPSTONJOYSTICK & BUTTON_DOWN)) //'a' key=DOWN
     {
-    waitforclearkeyb();
-    
+      waitforclearkeyb();
+
       if ( (sdNavigationCursor + 1) == (sdNavigationIndex + sdNavigationReadFiles)) //goto next page
       {
         // DEBUG_PRINTLN("DOWNPAGE");
         int foundfiles = sdNavigationList(sdNavigationCursor + 1 , LISTLEN, fromEeprom);
-         DEBUG_PRINTLN("down");
+        DEBUG_PRINTLN("down");
         DEBUG_PRINTLN(foundfiles);
         if (foundfiles <= 0)//page empty!!! go back...
         {
@@ -578,8 +583,8 @@ int ICACHE_FLASH_ATTR sdNavigation(boolean fromEeprom)
     }
     if (!(KEY[2] & BUTTON_Q) ||  (KEMPSTONJOYSTICK & BUTTON_UP)) //'q' key=UP
     {
-     waitforclearkeyb();
-  
+      waitforclearkeyb();
+
       if (sdNavigationCursor == 0) return (0);
 
       if ((sdNavigationCursor % LISTLEN) == 0) //return to previous page
@@ -607,10 +612,10 @@ int ICACHE_FLASH_ATTR sdNavigation(boolean fromEeprom)
 
 
     }
-    if (!(KEY[6] & 1) ||  (KEMPSTONJOYSTICK & BUTTON_FIRE)) //'enter' key  or button
+    if (!(KEY[6] & BUTTON_EN) ||  (KEMPSTONJOYSTICK & BUTTON_FIRE)) //'enter' key  or button
     {
-    waitforclearkeyb();
-       //scan the root for the selected file and load it
+      waitforclearkeyb();
+      //scan the root for the selected file and load it
       if (fromEeprom == false)
       {
         sdNavigationFileProcess(sdNavigationCursor, 1 , &sdNavigationCallbackFilter, &sdNavigationCallbackLoad);
@@ -621,18 +626,18 @@ int ICACHE_FLASH_ATTR sdNavigation(boolean fromEeprom)
       }
       sdNavigationReset();
       delay(100);
-       bdisplayed = false;
+      bdisplayed = false;
       return 2;//continue to new program
 
     }
   }//at least 1 file found
 
-  if (!(KEY[4] & 1) ||  (KEMPSTONJOYSTICK & BUTTON_LEFT)) //'0' key or left
+  if (checkKeybBreak() || (!(KEY[4] & BUTTON_0)) ||  (KEMPSTONJOYSTICK & BUTTON_LEFT)) //'0' key or left
   {
     waitforclearkeyb();
-     sdNavigationReset();
+    sdNavigationReset();
     delay(100);
-     bdisplayed = false;
+    bdisplayed = false;
     return -1;//back to old program
   }
 
@@ -644,4 +649,108 @@ int ICACHE_FLASH_ATTR sdNavigation(boolean fromEeprom)
 void ICACHE_FLASH_ATTR sdNavigationSetup()
 {
   //spi pin enabled in spiswitch
+}
+
+
+
+
+
+
+
+
+int ICACHE_FLASH_ATTR sdNavigationFileSave(char *filename) {
+
+  SdFat sd;
+  File file;
+
+  sdNavigationLockSPI();
+
+
+  if (!sd.begin(SD_CS, SPISettings(
+                  SPI_SPEED_SD,
+                  MSBFIRST,
+                  SPI_MODE0))) {
+    sdNavigationUnlockSPI();
+
+    DEBUG_PRINTLN(F("LOCK KO"));
+    return -1;
+  }
+
+
+  file = sd.open(filename, O_TRUNC | O_RDWR | O_CREAT   );
+  if (!file.isOpen())
+  {
+    DEBUG_PRINTLN(F("OPEN KO"));
+    sdNavigationUnlockSPI();
+    return -1;
+  }
+
+
+
+
+  if ( z80FileSave(&file))
+  {
+    DEBUG_PRINTLN(F("WRITE KO AT EXIT"));
+    sdNavigationUnlockSPI();
+    return -1;
+  }
+
+  DEBUG_PRINTLN(F("WRITE OK"));
+  sdNavigationUnlockSPI();
+  return 0;
+}
+
+
+
+int sdNavigationGetFileName(char *filename)
+{
+  int ioffset = 0;
+  char c;
+
+
+  sdNavigationCls(INK_BLACK);
+  sdNavigationPrintFStrBig(0, 0, F("Type file name"), COLOR_TEXT);
+  sdNavigationPrintFStrBig(0, 2, F("without ext"), COLOR_TEXT);
+
+  waitforclearkeyb();
+
+
+  for (;;)
+  {
+    if (checkKeybBreak())
+    {
+      waitforclearkeyb();
+      return -1;
+    }
+    sdNavigationPrintChBig(ioffset * 2, 6, '_', COLOR_TEXT + COLOR_BLINK);
+    if (ioffset < 15) sdNavigationPrintChBig(ioffset * 2 + 2, 6, ' ', COLOR_TEXT);
+    c = getPressedCharacter();
+
+    if (c == '\b' && ioffset) ioffset--; //delete
+
+    if (ioffset < 15 && ( //new character
+          (c >= 'a' && c <= 'z') ||
+          (c >= 'A' && c <= 'Z') ||
+          c == '_' || c == '-'))
+    {
+      sdNavigationPrintChBig(ioffset * 2 , 6, c, COLOR_TEXT);
+      filename[ioffset++] = c;
+    }
+
+    if (c == '\n')//enter
+    {
+      if (ioffset > 0)
+      {
+        filename[ioffset] = 0;
+        return 0;
+      }
+      else
+      {
+        return -1;
+      }
+    }
+
+  }
+
+
 }

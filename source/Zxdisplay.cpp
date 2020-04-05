@@ -128,6 +128,11 @@ void zxDisplayBorderSet(int i)
   zxDisplayBorder = hw_32bits_colors[i & 7];
 }
 
+int zxDisplayBorderGet()
+{
+  return zxDisplayBorder ;
+}
+
 
 //help function to use serial from z80 core
 void zxDisplayWriteSerial(int i)

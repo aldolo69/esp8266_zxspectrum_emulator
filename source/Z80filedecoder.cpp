@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include"z80.h"
- 
+
 #include "Z80filedecoder.h"
 
 extern Z80 state;
@@ -137,11 +137,12 @@ void ICACHE_FLASH_ATTR z80FileDecompressFromEeprom(const unsigned char *MEM, int
 //variable for buffered file or eeprom decoding
 const unsigned char *z80FileFillCacheAdd;
 SdFile *z80FileFillCachefile;
+File   *z80FileFillCachefile2;
 int z80FileLen = 0;
 int z80FileOff = 0;
 
 //start decoding from eeprom
-void z80FileFillCacheStartFromEeprom(const unsigned char *p, int len)
+void ICACHE_FLASH_ATTR z80FileFillCacheStartFromEeprom(const unsigned char *p, int len)
 {
   z80FileFillCacheAdd = p;
   z80FileLen = len;
@@ -149,7 +150,7 @@ void z80FileFillCacheStartFromEeprom(const unsigned char *p, int len)
   z80FileOff = 1024;
 }
 
-void z80FileFillCacheContinueFromEeprom()
+void ICACHE_FLASH_ATTR z80FileFillCacheContinueFromEeprom()
 {
   DEBUG_PRINTLN("readcache");
   DEBUG_PRINTLN(z80FileOff);
@@ -159,7 +160,7 @@ void z80FileFillCacheContinueFromEeprom()
 }
 
 //start decoding from file
-void z80FileFillCacheStart(SdFile *p, int len)
+void ICACHE_FLASH_ATTR z80FileFillCacheStart(SdFile *p, int len)
 {
   z80FileFillCachefile = p;
   z80FileLen = len;
@@ -167,7 +168,7 @@ void z80FileFillCacheStart(SdFile *p, int len)
   z80FileOff = 1024;
 }
 
-void z80FileFillCacheContinue()
+void ICACHE_FLASH_ATTR z80FileFillCacheContinue()
 {
   DEBUG_PRINTLN("readcache");
   DEBUG_PRINTLN(z80FileOff);
@@ -175,6 +176,58 @@ void z80FileFillCacheContinue()
   z80FileOff += (z80FileLen - z80FileOff) >= 512 ? 512 : (z80FileLen - z80FileOff);
 }
 
+
+void ICACHE_FLASH_ATTR z80FileSaveFillCacheStart(File *p, int offset)
+{
+  z80FileFillCachefile2 = p;
+  z80FileOff = offset;
+}
+
+int ICACHE_FLASH_ATTR z80FileSaveFillCacheContinue(unsigned char c )
+{
+  CACHE[z80FileOff] = c;
+  z80FileOff++;
+  if (z80FileOff == 512)
+  {
+    if (z80FileOff != z80FileFillCachefile2->write(CACHE , z80FileOff))
+    {
+      DEBUG_PRINTLN(F("WRITE KO"));
+      return -1;
+    }
+
+     
+    DEBUG_PRINTLN(F("WRITE:"));
+    DEBUG_PRINTLN(z80FileOff);
+   z80FileOff = 0;
+  }
+  return 0;
+}
+
+int ICACHE_FLASH_ATTR z80FileSaveFillCacheEnd( )
+{
+  int i;
+  if (z80FileOff != 0)
+  {
+//    i=;
+//    DEBUG_PRINTLN(F("WRITE return:"));
+//    DEBUG_PRINTLN(i);
+
+    if (z80FileOff != z80FileFillCachefile2->write(CACHE , z80FileOff))
+    {
+      DEBUG_PRINTLN(F("WRITE KO END"));
+      return -1;
+    }
+    DEBUG_PRINTLN(F("WRITE:"));
+    DEBUG_PRINTLN(z80FileOff);
+
+  }
+
+  z80FileFillCachefile2->flush();
+  z80FileFillCachefile2->close();
+
+  DEBUG_PRINTLN(F("WRITE END END"));
+  return 0;
+}
 
 
 
@@ -364,7 +417,7 @@ int  ICACHE_FLASH_ATTR z80FileLoad(SdFile *file)
   struct z80fileheader header;
   struct z80fileheader2 header2;
   int offset = 30;
-int filesize=file->fileSize();
+  int filesize = file->fileSize();
 
   z80FileFillCacheStart(file, filesize);
 
@@ -402,3 +455,101 @@ int filesize=file->fileSize();
 }
 
 
+
+
+
+//save z80 file. file format 1 with 30 bytes header
+int  ICACHE_FLASH_ATTR z80FileSave(File *file)
+{
+
+  int offset;
+  int counter;
+
+  GetZ80(&state, (struct z80fileheader *)(CACHE));
+  z80FileSaveFillCacheStart(file, 30);
+
+
+  DEBUG_PRINTLN("SAVE start");
+  //DEBUG_PRINTLN(sizeof(z80file_decathlon));
+
+  for (offset = 0; offset < RAMSIZE - 4;)
+  {
+    //The compression method is very simple: it replaces repetitions of at least five equal bytes by a four-byte code ED ED xx yy,
+    //which stands for "byte yy repeated xx times". Only sequences of length at least 5 are coded.
+    //The exception is sequences consisting of ED's; if they are encountered, even two ED's are encoded into ED ED 02 ED.
+
+    //Finally, every byte directly following a single ED is not taken into a block,
+    //for example ED 6*00 is not encoded into ED ED ED 06 00 but into ED 00 ED ED 05 00. The block is terminated by an end marker, 00 ED ED 00.
+
+
+    if (offset > 1 && RAM[offset - 2] != 0xed && RAM[offset - 1] == 0xed && RAM[offset] != 0xed)
+    {
+      if(z80FileSaveFillCacheContinue(RAM[offset] )) return -1;
+      offset++;
+      continue;
+    }
+
+    if (RAM[offset] == 0xed &&
+        RAM[offset] == RAM[offset + 1]
+       )
+    {
+      //ED compression
+
+      //up to ff bytes...
+      for (counter = 0; counter < 254; counter++)
+      {
+        if ( RAM[offset + counter] != RAM[offset + counter + 1]) break;
+        if (offset + counter + 1 == RAMSIZE) break;
+      }
+
+      counter++;
+      if(z80FileSaveFillCacheContinue(0xed )) return -1;;
+      if(z80FileSaveFillCacheContinue(0xed )) return -1;;
+      if(z80FileSaveFillCacheContinue(counter )) return -1;;
+      if(z80FileSaveFillCacheContinue(RAM[offset] )) return -1;;
+      offset += counter;
+
+      continue;
+    }
+
+    if (RAM[offset] == RAM[offset + 1] &&
+        RAM[offset] == RAM[offset + 2] &&
+        RAM[offset] == RAM[offset + 3] &&
+        RAM[offset] == RAM[offset + 4]
+       )
+    {
+      //non ED compression
+
+      //up to ff bytes...
+      for (counter = 0; counter < 254; counter++)
+      {
+        if ( RAM[offset + counter] != RAM[offset + counter + 1]) break;
+        if (offset + counter + 1 == RAMSIZE) break;
+      }
+
+      counter++;
+      if(z80FileSaveFillCacheContinue(0xed )) return -1;;
+      if(z80FileSaveFillCacheContinue(0xed )) return -1;;
+      if(z80FileSaveFillCacheContinue(counter )) return -1;;
+      if(z80FileSaveFillCacheContinue(RAM[offset] )) return -1;;
+      offset += counter;
+      continue;
+    }
+
+    if(z80FileSaveFillCacheContinue(RAM[offset] )) return -1;
+    offset++;
+  }
+
+  for (; offset < RAMSIZE;)
+  {
+    if(z80FileSaveFillCacheContinue(RAM[offset++] )) return -1;;
+  }
+
+  if(z80FileSaveFillCacheContinue(0 )) return -1;;
+  if(z80FileSaveFillCacheContinue(0xed )) return -1;;
+  if(z80FileSaveFillCacheContinue(0xed )) return -1;;
+  if(z80FileSaveFillCacheContinue(0 )) return -1;;
+
+  return z80FileSaveFillCacheEnd( );
+   
+}
