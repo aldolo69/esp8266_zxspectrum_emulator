@@ -3,6 +3,8 @@ ZX Spectrum emulator with esp8266 and ili9341 display.
 
 Compiled using https://github.com/uli/Arduino_nowifi
 
+Please check https://hackaday.io/project/169711-zx-spectrum-emulator-with-esp8266 for the libs i've used
+
 * audio
 * joystick
 * load .z80 from SD
