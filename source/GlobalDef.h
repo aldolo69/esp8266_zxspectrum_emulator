@@ -73,7 +73,7 @@ better to drive the right cs pins before using sd or tft lib
  
 
 
-#define DEBUG_PRINT //undefine to remove debug code
+//#define DEBUG_PRINT //undefine to remove debug code
 
 #ifdef DEBUG_PRINT
  #define DEBUG_PRINTLN(x)  Serial.println(x)
