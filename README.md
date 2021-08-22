@@ -42,6 +42,16 @@ Parts list:
 
 47 buttons
 
+#update 2021-08
+After an update of the regular 8266 core the nowifi core compile failed. Had to change 2 things:
+
+- to compile use extesa compiler 2.5. look in arduino/packages/esp8266/tools/xtesa-lx106-elf-gcc.
+if there is a versione > 2.5.0 then rename the newer folders (in example 3.0.0xxx to 0.3.0.0xxxx)
+
+- in case of missing .ld file change the platform.txt file to add the absolute path to the linker script
+compiler.c.elf.flags=-g {compiler.warning_flags} -O2 -nostdlib -Wl,--no-check-sections -u call_user_start -u _printf_float -u _scanf_float -Wl,-static "-L{compiler.libc.path}/lib" "-TC:/Users/it03281/Documents/Arduino/hardware/esp8266com/Arduino_nowifi-sdknowifi/tools/sdk/ld/{build.flash_ld}" -Wl,--gc-sections -Wl,-wrap,system_restart_local -Wl,-wrap,spi_flash_read
+
+
 
 ![Screenshot](zx_esp8266.JPG)
 ![Screenshot](zx_keyboard_joystick.JPG)
